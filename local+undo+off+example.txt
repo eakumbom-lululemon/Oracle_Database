@@ -1,0 +1,51 @@
+1- open sqlplus / as sysdba  and be sure u r in the root 
+
+2- do this query
+
+select property_value from database_properties where property_name='LOCAL_UNDO_ENABLED';
+
+--the value will be true for oracle 18c
+
+3- let us update the value to be false
+
+4- shutdown immediate;
+
+5-  startup upgrade;
+
+6- alter database local undo off;
+
+7- shutdown immediate;
+
+8- startup;
+
+9- 
+
+select property_value from database_properties where property_name='LOCAL_UNDO_ENABLED';
+
+10-- show pdbs  and choose any one 
+
+
+11--alter session set container=orclpdb;
+
+12-- create table then do uncommited trans
+
+create table test ( n number );
+
+insert into test values (1);
+----------------------------------------------------------------------------------------------------------------
+
+open another terminal
+
+1- open sqlplus / as sysdba  and be sure u r in the root 
+2- create directory in the path /u01/app/oracle/oradata/ORCL    name it pdbkh1 for example
+3- try to do this
+
+  create pluggable database pdbkh1 from orclpdb create_file_dest = '/u01/app/oracle/oradata/ORCL/pdbkh1'
+
+4- it will give error
+do this
+
+host oerr ora 65035
+-------
+
+back again to LOCAL_UNDO_ENABLED= true

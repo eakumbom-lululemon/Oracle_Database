@@ -1,0 +1,24 @@
+adrci> set HOMEPATH diag/rdbms/orcl/orcl
+
+
+adrci> select sizep_policy from adr_control_aux
+
+18446744073709551615
+
+adrci> select shortp_policy, longp_policy from adr_control;
+
+SHORTP_POLICY        LONGP_POLICY         
+-------------------- -------------------- 
+720                  8760  
+
+
+
+adrci> estimate ( sizep_policy =200000000) ;
+
+adrci> estimate ( shortp_policy =192, longp_policy=192 ) ;
+
+ADRCI> set control (SHORTP_POLICY = 192)
+ADRCI> set control (LONGP_POLICY = 192)
+ADRCI> set control (SIZEP_POLICY = 8559020)
+
+
